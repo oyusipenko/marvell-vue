@@ -7,7 +7,11 @@ import "balm-ui-css";
 
 const app = createApp(App);
 
-app.use(BalmUI);
+app.use(BalmUI, {
+  UiTopAppBar: {
+    type: 8,
+  },
+});
 app.use(BalmUIPlus);
 
 app.mount("#app");
