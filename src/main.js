@@ -9,7 +9,7 @@ const app = createApp(App);
 
 app.use(BalmUI, {
   UiTopAppBar: {
-    type: 8,
+    type: 0,
   },
 });
 app.use(BalmUIPlus);
