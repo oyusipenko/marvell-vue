@@ -11,6 +11,7 @@ app.use(BalmUI, {
   UiTopAppBar: {
     type: 0,
   },
+  UiPagination: {},
 });
 app.use(BalmUIPlus);
 

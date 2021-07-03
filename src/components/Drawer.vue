@@ -24,6 +24,7 @@ export default {
 <style scoped>
 .mdc-drawer {
   margin-top: 64px;
+  height: calc(100vh - 64px);
 }
 .mdc-drawer__header {
   min-height: 45px;

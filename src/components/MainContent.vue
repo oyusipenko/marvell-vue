@@ -1,7 +1,16 @@
 <template>
   <ui-drawer-app-content class="demo-app-content">
-    <button @click="getMarvellData">getData</button>
-
+    <ui-pagination
+      :model-value="page"
+      @update:modelValue="
+        changePagination($event);
+        getData(($event - 1) * 20);
+      "
+      :total="total"
+      show-total
+      position="right"
+      pageSize="20"
+    ></ui-pagination>
     <ui-grid class="demo-grid">
       <ui-grid-cell
         v-for="character in characters"
@@ -47,30 +56,52 @@
 </template>
 
 <script>
+import { onMounted, onUpdated } from "@vue/runtime-core";
 export default {
   name: "MainContent",
-  setup() {
-    async function getMarvellData() {
-      const response = await fetch(
-        "http://gateway.marvel.com/v1/public/characters?apikey=3fbf47c3e0738e63b5531ab50039e824"
-      ).then((response) => response.json());
-      console.log(response.data.results);
-      console.log(response.data);
-      this.characters = [...this.characters, ...response.data.results];
-    }
-    // mounted
-    onMounted(() => {
-      console.log("Component is mounted!");
-      getMarvellData();
-    });
-  },
   data() {
     return {
       characters: [],
+      page: 1,
+      total: 0,
     };
   },
-  methods: {},
+  methods: {
+    getData: async function getMarvellData(offset = 0) {
+      const response = await fetch(
+        `http://gateway.marvel.com/v1/public/characters?offset=${offset}&apikey=3fbf47c3e0738e63b5531ab50039e824`
+      ).then((response) => response.json());
+      console.log(response.data.results);
+      this.characters = [...response.data.results];
+      this.total = response.data.total;
+    },
+    changePagination: function (pageNumber) {
+      this.page = pageNumber;
+    },
+  },
+
+  mounted() {
+    // console.log("mounted!");
+    // console.log(this.page);
+    this.getData();
+  },
+  updated() {
+    // console.log(this.page);
+    // console.log(this.total);
+    // console.log("213123");
+  },
+  setup() {
+    onMounted(() => {
+      // console.log(page);
+      // console.log(total);
+    });
+    onUpdated(() => {
+      // console.log(page);
+      // console.log(total);
+    });
+  },
 };
+console.log("123");
 </script>
 
 <style scoped>
