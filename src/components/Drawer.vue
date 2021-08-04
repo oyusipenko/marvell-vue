@@ -7,9 +7,9 @@
     <ui-drawer-content>
       <ui-nav>
         <ui-nav-item href="javascript:void(0)" active>Characters</ui-nav-item>
-        <ui-nav-item href="javascript:void(0)">Comics</ui-nav-item>
+        <!-- <ui-nav-item href="javascript:void(0)">Comics</ui-nav-item>
         <ui-nav-item href="javascript:void(0)">Creators</ui-nav-item>
-        <ui-nav-item href="javascript:void(0)">Events</ui-nav-item>
+        <ui-nav-item href="javascript:void(0)">Events</ui-nav-item> -->
       </ui-nav>
     </ui-drawer-content>
   </ui-drawer>
