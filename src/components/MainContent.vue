@@ -57,6 +57,7 @@
 
 <script>
 import { onMounted, onUpdated } from "@vue/runtime-core";
+import CryptoJS from "crypto-js";
 export default {
   name: "MainContent",
   data() {
@@ -68,10 +69,13 @@ export default {
   },
   methods: {
     getData: async function getMarvellData(offset = 0) {
+      const timeStamp = new Date().getTime();
+      const publicKey = "3fbf47c3e0738e63b5531ab50039e824";
+      const privateKey = "fef27312db649a04f7968f1b5a5277b7d7abff83";
+      const hash = CryptoJS.MD5(timeStamp + privateKey + publicKey);
       const response = await fetch(
-        `http://gateway.marvel.com/v1/public/characters?offset=${offset}&apikey=3fbf47c3e0738e63b5531ab50039e824&hash=6533767baf4c7d8083265200ac6ac4a0`
+        `http://gateway.marvel.com/v1/public/characters?offset=${offset}&ts=${timeStamp}&apikey=${publicKey}&hash=${hash}`
       ).then((response) => response.json());
-      console.log(response.data.results);
       this.characters = [...response.data.results];
       this.total = response.data.total;
     },
@@ -101,7 +105,6 @@ export default {
     });
   },
 };
-console.log("123");
 </script>
 
 <style scoped>
