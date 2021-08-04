@@ -69,7 +69,7 @@ export default {
   methods: {
     getData: async function getMarvellData(offset = 0) {
       const response = await fetch(
-        `http://gateway.marvel.com/v1/public/characters?offset=${offset}&apikey=3fbf47c3e0738e63b5531ab50039e824`
+        `http://gateway.marvel.com/v1/public/characters?offset=${offset}&apikey=3fbf47c3e0738e63b5531ab50039e824&hash=6533767baf4c7d8083265200ac6ac4a0`
       ).then((response) => response.json());
       console.log(response.data.results);
       this.characters = [...response.data.results];
