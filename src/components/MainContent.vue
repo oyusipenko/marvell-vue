@@ -72,9 +72,11 @@ export default {
       const timeStamp = new Date().getTime();
       const publicKey = "3fbf47c3e0738e63b5531ab50039e824";
       const privateKey = "fef27312db649a04f7968f1b5a5277b7d7abff83";
-      const hash = CryptoJS.MD5(timeStamp + privateKey + publicKey);
+      console.log(timeStamp + privateKey + publicKey);
+      const hash = CryptoJS.MD5(timeStamp + privateKey + publicKey).toString();
+      console.log(hash);
       const response = await fetch(
-        `http://gateway.marvel.com/v1/public/characters?offset=${offset}&ts=${timeStamp}&apikey=${publicKey}&hash=${hash.toString()}`
+        `https://gateway.marvel.com/v1/public/characters?offset=${offset}&ts=${timeStamp}&apikey=${publicKey}&hash=${hash.toString()}`
       ).then((response) => response.json());
       this.characters = [...response.data.results];
       this.total = response.data.total;
